@@ -1,0 +1,199 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  /* MusicHub original brand palette — deep charcoal + violet/cyan accent,
+     deliberately distinct from any existing streaming brand's green. */
+  --mh-bg: #0b0d10;
+  --mh-surface: #14171c;
+  --mh-surface-raised: #1c2028;
+  --mh-border: rgba(255, 255, 255, 0.08);
+
+  --mh-accent-1: #7c3aed;   /* violet */
+  --mh-accent-2: #22d3ee;   /* cyan */
+  --mh-accent-gradient: linear-gradient(135deg, var(--mh-accent-1), var(--mh-accent-2));
+
+  --mh-text-primary: #f5f6f8;
+  --mh-text-secondary: #9aa1ac;
+  --mh-text-muted: #656d78;
+
+  --mh-radius-sm: 8px;
+  --mh-radius-md: 14px;
+  --mh-radius-lg: 20px;
+
+  --mh-player-height: 88px;
+  --mh-sidebar-width: 260px;
+  --mh-mobile-nav-height: 64px;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--mh-bg);
+  color: var(--mh-text-primary);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--mh-surface-raised); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Utility */
+.mh-glass {
+  background: rgba(28, 32, 40, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--mh-border);
+}
+
+.mh-card-hover {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.mh-card-hover:hover {
+  transform: translateY(-4px);
+  background: var(--mh-surface-raised);
+}
+
+.mh-text-gradient {
+  background: var(--mh-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 992px) {
+  .mh-main-content { margin-left: var(--mh-sidebar-width); }
+}
+
+/* Auth form inputs */
+.mh-input {
+  background: var(--mh-surface-raised) !important;
+  border: 1px solid var(--mh-border) !important;
+  color: var(--mh-text-primary) !important;
+  border-radius: var(--mh-radius-sm) !important;
+  padding: 10px 14px !important;
+}
+.mh-input:focus {
+  border-color: var(--mh-accent-2) !important;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2) !important;
+}
+.mh-input::placeholder { color: var(--mh-text-muted); }
+
+.mh-btn-primary {
+  background: var(--mh-accent-gradient);
+  border: none;
+  color: #0b0d10;
+  font-weight: 600;
+  border-radius: var(--mh-radius-sm);
+  padding: 10px 0;
+}
+.mh-btn-primary:disabled { opacity: 0.6; }
+
+.mh-card-hover:hover .mh-play-overlay {
+  opacity: 1 !important;
+  transform: translateY(-2px);
+}
+
+/* Horizontal scroll rows for card sections */
+.mh-scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.mh-scroll-row::-webkit-scrollbar { height: 6px; }
+
+.mh-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.mh-see-all {
+  font-size: 0.85rem;
+  color: var(--mh-text-secondary);
+}
+.mh-see-all:hover { color: var(--mh-text-primary); }
+
+/* Skeleton loaders */
+@keyframes mh-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.mh-skeleton {
+  background: linear-gradient(90deg, var(--mh-surface-raised) 25%, #262b35 37%, var(--mh-surface-raised) 63%);
+  background-size: 800px 100%;
+  animation: mh-shimmer 1.4s ease infinite;
+  border-radius: var(--mh-radius-sm);
+}
+
+.dropdown-item-mh {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--mh-text-primary);
+  padding: 8px 14px;
+  font-size: 13px;
+}
+.dropdown-item-mh:hover { background: rgba(255,255,255,0.06); }
+
+/* Admin dashboard */
+.mh-admin-table { width: 100%; border-collapse: collapse; }
+.mh-admin-table th {
+  text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--mh-text-muted); padding: 8px 10px; border-bottom: 1px solid var(--mh-border);
+}
+.mh-admin-table td {
+  padding: 10px; border-bottom: 1px solid var(--mh-border); font-size: 13px; vertical-align: middle;
+}
+.mh-admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+.mh-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600;
+}
+.mh-icon-btn {
+  background: none; border: none; color: var(--mh-text-secondary); padding: 4px; border-radius: 6px;
+}
+.mh-icon-btn:hover { background: var(--mh-surface-raised); color: var(--mh-text-primary); }
+
+/* Player bar sits full-width on mobile, offset past the sidebar on desktop —
+   matches .mh-main-content so it never overlaps the sidebar or gets clipped. */
+.mh-player-bar { left: 0; }
+@media (min-width: 992px) {
+  .mh-player-bar { left: var(--mh-sidebar-width); }
+}
+
+/* Smooth scrolling, respecting users who've asked for reduced motion */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Visible focus ring for keyboard navigation */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--mh-accent-2);
+  outline-offset: 2px;
+}
+
+/* Simple fade-in for route changes */
+@keyframes mh-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.mh-page-transition { animation: mh-fade-in 0.25s ease; }

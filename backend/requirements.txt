@@ -1,0 +1,14 @@
+asgiref==3.12.1
+Django<6.0,>=5.0
+django-cors-headers==4.9.0
+django-filter==26.1
+djangorestframework==3.18.1
+djangorestframework_simplejwt==5.5.1
+pillow==12.3.0
+PyJWT==2.14.0
+python-decouple==3.8
+sqlparse==0.6.0
+
+# Only needed if DB_ENGINE=mysql in .env — SQLite (the default) needs none
+# of this. Uncomment if you switch to a real MySQL database:
+# mysqlclient==2.2.4
