@@ -68,7 +68,7 @@ export function PlayerProvider({ children }) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioCtx();
       const audio = audioRef.current;
-      audio.crossOrigin = "anonymous";
+      
 
       const source = ctx.createMediaElementSource(audio);
       const filters = EQ_BANDS.map((band, i) => {
