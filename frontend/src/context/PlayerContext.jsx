@@ -93,6 +93,7 @@ export function PlayerProvider({ children }) {
       sourceNodeRef.current = source;
       filtersRef.current = filters;
       analyserRef.current = analyser;
+      if (ctx.state === "suspended") ctx.resume();
     } catch {
       // Web Audio API unavailable or blocked — playback still works via the
       // plain <audio> element, just without EQ/visualizer.
